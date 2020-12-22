@@ -10,9 +10,17 @@
 
   &__wrapper {
     @include reset-margin;
+    position: relative;
+    max-width: 520px;
+    width: 100%;
+  }
+
+  &__inner-wrapper {
+    @include reset-margin;
     max-width: 400px;
     width: 100%;
     overflow: hidden;
+    box-shadow: 0 3px 10px 0 $c-black;
   }
 
   &__list {
@@ -53,11 +61,36 @@
   }
 
   &__buttons-wrapper {
+    @include reset-margin;
+    position: absolute;
+    top: 50%;
+    left: 0;
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none;
 
     button {
+      width: 40px;
+      height: 40px;
+      background-image: url("../assets/images/svg/arrow.svg");
+      background-size: 30px 30px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: $c-white;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 0 8px 0 $c-black;
+      pointer-events: initial;
+      cursor: pointer;
+
       &:first-child {
         margin-right: 20px;
+      }
+
+      &:last-child {
+        transform: rotate(180deg);
       }
     }
   }
