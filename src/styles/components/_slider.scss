@@ -26,7 +26,8 @@
   &__list {
     @include reset-list;
     display: flex;
-    width: 300%;
+    // width: 400%;
+    // transform: translateX(-100%);
   }
 
   &__item {
