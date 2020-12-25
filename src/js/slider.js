@@ -1,4 +1,3 @@
-// const template = document.querySelector('#slide-item').content;
 const slider = document.querySelector('.slider');
 const sliderList = slider && slider.querySelector('.slider__list');
 const prevButton = slider && slider.querySelector('.slider__buttons-wrapper button:first-child');
@@ -13,52 +12,24 @@ let slideIndex = 1;
 let currentSlide = sliderItems[slideIndex];
 let translateWidth = slideWidth;
 
-const translateSlider = () => {
-  translateWidth = translateWidth + 0.5;
-  sliderList.style.transform = `translateX(-${translateWidth}%)`;
-}
+const translateSlider = (button) => {
+  let debounceCond;
 
-// const handleNextButtonClick = (evt) => {
-//   evt.preventDefault();
+  if (button === 'right') debounceCond = translateWidth < slideIndex * slideWidth;
+  if (button === 'left') debounceCond = translateWidth > slideIndex * slideWidth;
 
-//   if (translateWidth < slideIndex * slideWidth) {
-//     return false;
-//   }
-
-//   if (currentSlide.classList.contains('clonned-item')) {
-//     slideIndex = 1;
-//     translateWidth = slideWidth;
-//   }
-
-//   slideIndex = slideIndex + 1;
-//   currentSlide = sliderItems[slideIndex];
-
-//   let timer = setInterval(() => {
-//     if (slideIndex * slideWidth - translateWidth < 0.5) {
-//       translateWidth = slideIndex * slideWidth;
-//       sliderList.style.transform = `translateX(-${translateWidth}%)`;
-//       clearInterval(timer);
-
-//       return true;
-//     }
-
-//     translateSlider();
-//   }, 10);
-// };
-
-const handlePrevButtonClick = (evt) => {
-  evt.preventDefault();
-
-  if (translateWidth > slideIndex * slideWidth) {
+  if (debounceCond) {
     return false;
   }
 
   if (currentSlide.classList.contains('clonned-item')) {
-    slideIndex = sliderItems.length - 2;
+    if (button === 'right') slideIndex = slideIndex = 1;
+    if (button === 'left') slideIndex = sliderItems.length - 2;
     translateWidth = slideWidth * slideIndex;
   }
 
-  slideIndex = slideIndex - 1;
+  if (button === 'right') slideIndex = slideIndex + 1;
+  if (button === 'left') slideIndex = slideIndex - 1;
   currentSlide = sliderItems[slideIndex];
 
   let timer = setInterval(() => {
@@ -70,10 +41,23 @@ const handlePrevButtonClick = (evt) => {
       return true;
     }
 
-    translateWidth = translateWidth - 0.5;
+    if (button === 'right') translateWidth = translateWidth + 0.5;
+    if (button === 'left') translateWidth = translateWidth - 0.5;
     sliderList.style.transform = `translateX(-${translateWidth}%)`;
-  }, 100);
+  }, 10);
 };
 
-// nextButton.addEventListener('click', handleNextButtonClick);
+const handleNextButtonClick = (evt) => {
+  evt.preventDefault();
+
+  translateSlider('right');
+};
+
+const handlePrevButtonClick = (evt) => {
+  evt.preventDefault();
+
+  translateSlider('left');
+};
+
+nextButton.addEventListener('click', handleNextButtonClick);
 prevButton.addEventListener('click', handlePrevButtonClick);
