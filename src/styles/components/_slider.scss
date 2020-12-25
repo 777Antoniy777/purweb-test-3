@@ -26,9 +26,6 @@
   &__list {
     @include reset-list;
     display: flex;
-    // width: 400%;
-    // transform: translateX(-100%);
-    // transition: transform 0.3s;
   }
 
   &__item {
@@ -37,18 +34,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &--aqva {
-      background-color: aquamarine;
-    }
-
-    &--orange {
-      background-color: orange;
-    }
-
-    &--green {
-      background-color: green;
-    }
 
     span {
       display: flex;
