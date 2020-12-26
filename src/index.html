@@ -21,21 +21,38 @@
         <div class="site-wrapper">
           <h1 class="slider__title">Slider</h1>
 
-          <ul class="slider__list">
-            <li class="slider__item">
-              <span>1</span>
-            </li>
+          <div class="slider__wrapper">
+            <div class="slider__inner-wrapper">
+              <div class="slider__list-wrapper">
+                <ul class="slider__list" data-amount="5" data-color="aqua, orange, green, yellow, pink"></ul>
+              </div>
 
-            <li class="slider__item">
-              <span>2</span>
-            </li>
+              <div class="slider__control-wrapper">
+                <button type="button" aria-label="Previous slide"></button>
+                <button type="button" aria-label="Next slide"></button>
+              </div>
+            </div>
 
-            <li class="slider__item">
-              <span>3</span>
-            </li>
-          </ul>
+            <div class="slider__nav-wrapper">
+              <ul class="slider__nav-list"></ul>
+            </div>
+          </div>
         </div>
       </section>
     </main>
+
+    <!-- Slide item template -->
+    <template id="slide-item">
+      <li class="slider__item">
+        <span></span>
+      </li>
+    </template>
+
+    <!-- Nav item template -->
+    <template id="nav-item">
+      <li class="slider__nav-item">
+        <button type="button"></button>
+      </li>
+    </template>
   </body>
 </html>
