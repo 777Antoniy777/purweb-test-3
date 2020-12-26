@@ -1,6 +1,10 @@
-const template = document.querySelector('#slide-item').content;
+const slideTemplate = document.querySelector('#slide-item');
+const navItemTemplate = document.querySelector('#nav-item');
+const slideTemplateContent = slideTemplate.content;
+const navItemTemplateContent = navItemTemplate.content;
 const slider = document.querySelector('.slider');
 const sliderList = slider && slider.querySelector('.slider__list');
+const navItemList = slider && slider.querySelector('.slider__nav-list');
 
 const createSlides = () => {
   const slidesAmount = sliderList.dataset.amount;
@@ -8,7 +12,7 @@ const createSlides = () => {
   const colorValues = colors.split(', ');
 
   for (let i = 0; i < slidesAmount; i++) {
-    const slide = template.cloneNode(true);
+    const slide = slideTemplateContent.cloneNode(true);
     const li = slide.children[0];
     const span = li.children[0];
     const spanValue = i + 1;
@@ -30,11 +34,35 @@ const createClonnedSlides = () => {
 
   firstSlide.classList.add('clonned-item');
   lastSlide.classList.add('clonned-item');
+  firstSlide.dataset.clone = 'last';
+  lastSlide.dataset.clone = 'first';
   sliderList.prepend(lastSlide);
   sliderList.append(firstSlide);
 };
 
-if (template) {
+const createNavItems = () => {
+  const slidesAmount = sliderList.dataset.amount;
+
+  for (let i = 0; i < slidesAmount; i++) {
+    const navItem = navItemTemplateContent.cloneNode(true);
+    const li = navItem.children[0];
+    const button = li.children[0];
+    const slideNumber = i + 1;
+
+    button.ariaLabel = `Slide ${slideNumber}`;
+    button.dataset.item = `${slideNumber}`;
+
+    if (i === 0) li.classList.add('nav-item-active');
+
+    navItemList.append(li);
+  }
+};
+
+if (slideTemplate) {
   createSlides();
   createClonnedSlides();
+}
+
+if (navItemTemplate) {
+  createNavItems();
 }

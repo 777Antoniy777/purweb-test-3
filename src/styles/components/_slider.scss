@@ -16,6 +16,11 @@
   }
 
   &__inner-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  &__list-wrapper {
     @include reset-margin;
     max-width: 400px;
     width: 100%;
@@ -23,9 +28,11 @@
     box-shadow: 0 3px 10px 0 $c-black;
   }
 
-  &__list {
+  &__list,
+  &__nav-list {
     @include reset-list;
     display: flex;
+    align-items: center;
   }
 
   &__item {
@@ -47,7 +54,7 @@
     }
   }
 
-  &__buttons-wrapper {
+  &__control-wrapper {
     @include reset-margin;
     position: absolute;
     top: 50%;
@@ -70,6 +77,7 @@
       border-radius: 50%;
       box-shadow: 0 0 8px 0 $c-black;
       pointer-events: initial;
+      transition: opacity 0.3s;
       cursor: pointer;
 
       &:first-child {
@@ -79,6 +87,62 @@
       &:last-child {
         transform: rotate(180deg);
       }
+
+      // hover
+      &:hover,
+      &:focus {
+        opacity: 0.7;
+      }
+
+      // active
+      &:active {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__nav-list {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__nav-item {
+    display: flex;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    button {
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      background-color: gray;
+      border: none;
+      border-radius: 50%;
+      transition: background-color 0.3s;
+      cursor: pointer;
+
+      // hover
+      &:hover,
+      &:focus {
+        background-color: black;
+      }
+
+      // active
+      &:active {
+        background-color: black;
+      }
+    }
+  }
+
+  // active nav item
+  .nav-item-active {
+    button {
+      background-color: black;
+      cursor: auto;
     }
   }
 }
